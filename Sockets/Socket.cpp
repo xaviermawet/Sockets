@@ -59,6 +59,44 @@ bool Socket::is_valid(void) const
     return this->_sock != INVALID_SOCKET;
 }
 
+bool Socket::setBlockingEnable(bool enable)
+{
+    if (!this->is_valid())
+        return false;
+ 
+/* Detect operating system */
+#if defined(WIN32) || defined(_WIN32)
+    
+    unsigned long mode = enable ? 0 : 1;
+    return (ioctlsocket(this->_sock, FIONBIO, &mode) == 0) ? true : false;
+    
+#elif defined(__unix__) || defined (__gnu_linux__) || \
+(defined(__APPLE__) && defined(__MACH__))
+    
+    int opts = ::fcntl(this->_sock, F_GETFL, 0);
+    
+    if (opts < 0)
+        return false;
+    
+    opts = enable ? (opts & ~O_NONBLOCK) : (opts | O_NONBLOCK);
+    
+    return (fcntl(this->_sock, F_SETFL, opts) == 0) ? true : false;
+    
+#else
+    
+    return false;
+
+#endif /* Detect operating system */
+}
+
+bool Socket::shutdown(int how)
+{
+    // More control over how the socket closes
+    return ::shutdown(this->_sock, how) != SOCKET_ERROR;
+    
+    // WARNING : It doesn't actually close the file descriptor — it just changes its usability
+}
+
 bool Socket::close(void)
 {
     if (closesocket(this->_sock) == SOCKET_ERROR)
@@ -68,10 +106,11 @@ bool Socket::close(void)
     return true;
 }
 
-bool Socket::shutdown(int how)
+Socket::~Socket(void)
 {
-    // More control over how the socket closes
-    return ::shutdown(this->_sock, how) != SOCKET_ERROR;
-    
-    // WARNING : It doesn't actually close the file descriptor — it just changes its usability
+    if (this->is_valid())
+    {
+        this->shutdown(SHUT_RDWR);
+        this->close();
+    }
 }

@@ -48,6 +48,8 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <fcntl.h>
+#include <unistd.h>
 #include <iostream>
 #include "SocketException.h"
 
@@ -67,9 +69,12 @@ class Socket
     
         SOCKET socketDescriptor(void) const;
         bool is_valid(void) const;
+        bool setBlockingEnable(bool enable);
     
-        bool close(void);
         bool shutdown(int how);
+        bool close(void);
+    
+        virtual ~Socket(void);
     
     protected:
     
