@@ -65,8 +65,11 @@ class Socket
         Socket(const Socket& copy_socket);
         Socket& operator=(const Socket& copy_socket);
     
+        SOCKET socketDescriptor(void) const;
         bool is_valid(void) const;
+    
         bool close(void);
+        bool shutdown(int how);
     
     protected:
     

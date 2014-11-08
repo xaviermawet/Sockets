@@ -49,6 +49,11 @@ Socket& Socket::operator=(const Socket& copy_socket)
     return *this;
 }
 
+SOCKET Socket::socketDescriptor(void) const
+{
+    return this->_sock;
+}
+
 bool Socket::is_valid(void) const
 {
     return this->_sock != INVALID_SOCKET;
@@ -61,4 +66,12 @@ bool Socket::close(void)
     
     this->_sock = INVALID_SOCKET;
     return true;
+}
+
+bool Socket::shutdown(int how)
+{
+    // More control over how the socket closes
+    return ::shutdown(this->_sock, how) != SOCKET_ERROR;
+    
+    // WARNING : It doesn't actually close the file descriptor — it just changes its usability
 }
