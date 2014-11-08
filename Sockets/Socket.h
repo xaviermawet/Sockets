@@ -48,10 +48,27 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
+#include "SocketException.h"
+
+enum class socket_type
+{
+    TCP = SOCK_STREAM,
+    UDP = SOCK_DGRAM
+};
 
 class Socket
 {
     public:
+    
+        Socket(socket_type sock_type);
+    
+        bool is_valid(void) const;
+    
+    protected:
+    
+        SOCKET      _sock;
+        SOCKADDR_IN _addr;
 };
 
 #endif /* defined(__Sockets__Socket__) */
