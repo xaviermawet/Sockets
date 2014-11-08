@@ -7,9 +7,11 @@
 //
 
 #include <iostream>
+#include <cstdlib>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
+int main(int argc, const char * argv[])
+{
     std::cout << "Hello, World!\n";
-    return 0;
+    
+    return EXIT_SUCCESS;
 }
