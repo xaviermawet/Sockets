@@ -13,7 +13,7 @@ Socket::Socket(socket_type sock_type)
 {
     // Create socket file descriptor
     this->_sock = ::socket(AF_INET, static_cast<int>(sock_type), 0);
-    if (!this->is_valid())
+    if (!this->isValid())
         throw SocketException("Unable to create socket", SOCKET_ERRNO);
     
     /* Specifies that the rules used in validating addresses supplied to bind()
@@ -39,7 +39,7 @@ Socket& Socket::operator=(const Socket& copy_socket)
     if (this != &copy_socket)
     {
         // Close current connection if needed
-        if (this->is_valid())
+        if (this->isValid())
             this->close();
         
         this->_sock = copy_socket._sock;
@@ -54,14 +54,14 @@ SOCKET Socket::socketDescriptor(void) const
     return this->_sock;
 }
 
-bool Socket::is_valid(void) const
+bool Socket::isValid(void) const
 {
     return this->_sock != INVALID_SOCKET;
 }
 
 bool Socket::setBlockingEnable(bool enable)
 {
-    if (!this->is_valid())
+    if (!this->isValid())
         return false;
  
 /* Detect operating system */
@@ -108,7 +108,7 @@ bool Socket::close(void)
 
 Socket::~Socket(void)
 {
-    if (this->is_valid())
+    if (this->isValid())
     {
         this->shutdown(SHUT_RDWR);
         this->close();

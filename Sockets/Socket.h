@@ -68,7 +68,7 @@ class Socket
         Socket& operator=(const Socket& copy_socket);
     
         SOCKET socketDescriptor(void) const;
-        bool is_valid(void) const;
+        bool isValid(void) const;
         bool setBlockingEnable(bool enable);
     
         bool shutdown(int how);
