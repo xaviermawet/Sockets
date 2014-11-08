@@ -63,8 +63,8 @@ class Socket
 {
     public:
     
-        Socket(socket_type sock_type);
-        Socket(const Socket& copy_socket);
+        explicit Socket(socket_type sock_type);
+        explicit Socket(const Socket& copy_socket);
         Socket& operator=(const Socket& copy_socket);
     
         SOCKET socketDescriptor(void) const;
