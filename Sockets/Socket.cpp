@@ -28,7 +28,37 @@ Socket::Socket(socket_type sock_type)
     memset(&this->_addr, 0, sizeof(this->_addr));
 }
 
+Socket::Socket(const Socket& copy_socket)
+    : _sock(copy_socket._sock)
+{
+    memcpy((void*)&this->_addr, (void*)&copy_socket._addr, sizeof(SOCKADDR_IN));
+}
+
+Socket& Socket::operator=(const Socket& copy_socket)
+{
+    if (this != &copy_socket)
+    {
+        // Close current connection if needed
+        if (this->is_valid())
+            this->close();
+        
+        this->_sock = copy_socket._sock;
+        memcpy((void*)&this->_addr, (void*)&copy_socket._addr, sizeof(SOCKADDR_IN));
+    }
+    
+    return *this;
+}
+
 bool Socket::is_valid(void) const
 {
     return this->_sock != INVALID_SOCKET;
+}
+
+bool Socket::close(void)
+{
+    if (closesocket(this->_sock) == SOCKET_ERROR)
+        return false;
+    
+    this->_sock = INVALID_SOCKET;
+    return true;
 }

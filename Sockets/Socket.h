@@ -62,8 +62,11 @@ class Socket
     public:
     
         Socket(socket_type sock_type);
+        Socket(const Socket& copy_socket);
+        Socket& operator=(const Socket& copy_socket);
     
         bool is_valid(void) const;
+        bool close(void);
     
     protected:
     
