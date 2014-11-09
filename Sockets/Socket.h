@@ -78,6 +78,8 @@ class Socket
     
     protected:
     
+        explicit Socket(SOCKET sock); // Private constructor. Skip ::socket
+    
         SOCKET      _sock;
         SOCKADDR_IN _addr;
 };
