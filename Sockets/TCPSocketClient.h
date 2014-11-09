@@ -22,6 +22,7 @@ class TCPSocketClient : public Socket
         TCPSocketClient& operator=(const TCPSocketClient& copy_tcpsocketclient);
     
         bool connectToHost(const std::string& ip, const int port);
+        bool connectToHostname(const std::string& hostname, const int port);
     
         virtual ~TCPSocketClient(void);
     
@@ -29,6 +30,7 @@ class TCPSocketClient : public Socket
     
         explicit TCPSocketClient(SOCKET sock);
     
+        bool gethostbyname(const std::string& hostname);
         bool connect(const int port, const std::string& host = "");
     
         bool _connected;

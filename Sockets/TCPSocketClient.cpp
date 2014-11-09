@@ -41,6 +41,21 @@ bool TCPSocketClient::connectToHost(const std::string& ip, const int port)
     return true;
 }
 
+bool TCPSocketClient::connectToHostname(const std::string& hostname, const int port)
+{
+    this->_connected = false;
+    
+    if (!this->gethostbyname(hostname))
+        throw SocketException("Unable to identify host", SOCKET_ERRNO);
+    
+    if (!this->connect(port))
+        throw SocketException("Unable to connect to the host", SOCKET_ERRNO);
+    
+    this->_connected = true;
+    
+    return true;
+}
+
 TCPSocketClient::~TCPSocketClient(void)
 {
     
@@ -50,6 +65,19 @@ TCPSocketClient::TCPSocketClient(SOCKET sock)
     : Socket(sock), _connected(false)
 {
     
+}
+
+bool TCPSocketClient::gethostbyname(const std::string& hostname)
+{
+    struct hostent* hostinfo = NULL;
+    
+    hostinfo = ::gethostbyname(hostname.c_str());
+    if (hostinfo == NULL)
+        return false;
+    
+    this->_addr.sin_addr = *(IN_ADDR*)hostinfo->h_addr;
+    
+    return true;
 }
 
 bool TCPSocketClient::connect(const int port, const std::string& host)
