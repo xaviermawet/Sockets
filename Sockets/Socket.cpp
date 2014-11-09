@@ -26,16 +26,22 @@ Socket::Socket(socket_type sock_type)
     
     // Initialize struct SOCKADDR_IN
     memset(&this->_addr, 0, sizeof(this->_addr));
+    
+    std::cout << "Socket constructor" << std::endl;
 }
 
 Socket::Socket(const Socket& copy_socket)
     : _sock(copy_socket._sock)
 {
     memcpy((void*)&this->_addr, (void*)&copy_socket._addr, sizeof(SOCKADDR_IN));
+    
+    std::cout << "Socket copy constructor" << std::endl;
 }
 
 Socket& Socket::operator=(const Socket& copy_socket)
 {
+    std::cout << "Socket operator =" << std::endl;
+    
     if (this != &copy_socket)
     {
         // Close current connection if needed
@@ -113,4 +119,6 @@ Socket::~Socket(void)
         this->shutdown(SHUT_RDWR);
         this->close();
     }
+    
+    std::cout << "Socket destructor" << std::endl;
 }

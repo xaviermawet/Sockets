@@ -11,7 +11,7 @@
 
 #include "Socket.h"
 
-class SocketServer : virtual public Socket
+class SocketServer : public Socket
 {
     public:
     

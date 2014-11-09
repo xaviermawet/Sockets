@@ -22,6 +22,8 @@ TCPSocket::TCPSocket(const TCPSocket& copy_tcpsocket)
 
 TCPSocket& TCPSocket::operator=(const TCPSocket &copy_tcpsocket)
 {
+    std::cout << "TCPSocket operator =" << std::endl;
+    
     Socket::operator=(copy_tcpsocket);
     
     return *this;
