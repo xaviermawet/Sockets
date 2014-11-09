@@ -11,13 +11,13 @@
 TCPSocket::TCPSocket(void)
     : Socket(socket_type::TCP)
 {
-    // Nothing to do here ...
+    std::cout << "TCPSocket constructor" << std::endl;
 }
 
 TCPSocket::TCPSocket(const TCPSocket& copy_tcpsocket)
     : Socket(copy_tcpsocket)
 {
-    
+    std::cout << "TCPSocket copy constructor" << std::endl;
 }
 
 TCPSocket& TCPSocket::operator=(const TCPSocket &copy_tcpsocket)
@@ -29,5 +29,5 @@ TCPSocket& TCPSocket::operator=(const TCPSocket &copy_tcpsocket)
 
 TCPSocket::~TCPSocket(void)
 {
-    
+    std::cout << "TCPSocket destructor" << std::endl;
 }
