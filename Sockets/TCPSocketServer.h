@@ -19,15 +19,20 @@ class TCPSocketServer : public SocketServer
     public:
     
         explicit TCPSocketServer(int port,
-                                 int max_pending_connexions = DEFAULT_MAX_CON);
+                                 int max_pending_connections = DEFAULT_MAX_CON);
         explicit TCPSocketServer(const TCPSocketServer& copy_tcpsocketserver);
         TCPSocketServer& operator=(const TCPSocketServer& copy_tcpsocketserver);
+    
+        int maxPendingConnections(void) const;
+        bool setMaxPendingConnections(int max_pending_connections);
     
         virtual ~TCPSocketServer(void);
     
     protected:
     
-        int _pendingConnections;
+        bool listen(const int backlog) const;
+    
+        int _maxPendingConnections;
 };
 
 #endif /* defined(__Sockets__TCPSocketServer__) */
