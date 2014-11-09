@@ -21,11 +21,15 @@ class TCPSocketClient : public Socket
         explicit TCPSocketClient(const TCPSocketClient& copy_tcpsocketclient);
         TCPSocketClient& operator=(const TCPSocketClient& copy_tcpsocketclient);
     
+        bool connectToHost(const std::string& ip, const int port);
+    
         virtual ~TCPSocketClient(void);
     
     protected:
     
         explicit TCPSocketClient(SOCKET sock);
+    
+        bool connect(const int port, const std::string& host = "");
     
         bool _connected;
 };

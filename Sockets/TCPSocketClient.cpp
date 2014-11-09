@@ -31,6 +31,16 @@ TCPSocketClient& TCPSocketClient::operator=(const TCPSocketClient& copy_tcpsocke
     return *this;
 }
 
+bool TCPSocketClient::connectToHost(const std::string& ip, const int port)
+{
+    this->_connected = this->connect(port, ip);
+    
+    if (!this->_connected)
+        throw SocketException("Unable to connect to the host", SOCKET_ERRNO);
+    
+    return true;
+}
+
 TCPSocketClient::~TCPSocketClient(void)
 {
     
@@ -40,4 +50,24 @@ TCPSocketClient::TCPSocketClient(SOCKET sock)
     : Socket(sock), _connected(false)
 {
     
+}
+
+bool TCPSocketClient::connect(const int port, const std::string& host)
+{
+    if (!this->isValid())
+        return false;
+    
+    this->_addr.sin_family = AF_INET;
+    this->_addr.sin_port   = htons(port);
+    
+    if (host != "")
+    {
+        inet_pton(AF_INET, host.c_str(), &this->_addr.sin_addr);
+        
+        if (SOCKET_ERRNO == EAFNOSUPPORT)
+            return false;
+    }
+    
+    return ::connect(this->_sock, (SOCKADDR*)&this->_addr, sizeof(SOCKADDR))
+            != SOCKET_ERROR;
 }
