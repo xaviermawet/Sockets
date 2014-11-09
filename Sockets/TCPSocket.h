@@ -11,7 +11,7 @@
 
 #include "Socket.h"
 
-class TCPSocket : public Socket
+class TCPSocket : virtual public Socket
 {
     public:
     

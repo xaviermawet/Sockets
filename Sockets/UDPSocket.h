@@ -11,7 +11,7 @@
 
 #include "Socket.h"
 
-class UDPSocket : public Socket
+class UDPSocket : virtual public Socket
 {
     public:
     
