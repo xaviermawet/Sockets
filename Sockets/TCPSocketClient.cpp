@@ -35,3 +35,9 @@ TCPSocketClient::~TCPSocketClient(void)
 {
     
 }
+
+TCPSocketClient::TCPSocketClient(SOCKET sock)
+    : Socket(sock), _connected(false)
+{
+    
+}

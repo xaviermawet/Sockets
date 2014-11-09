@@ -13,6 +13,8 @@
 
 class TCPSocketClient : public Socket
 {
+    friend class TCPSocketServer;
+    
     public:
     
         explicit TCPSocketClient(void);
@@ -22,6 +24,8 @@ class TCPSocketClient : public Socket
         virtual ~TCPSocketClient(void);
     
     protected:
+    
+        explicit TCPSocketClient(SOCKET sock);
     
         bool _connected;
 };
