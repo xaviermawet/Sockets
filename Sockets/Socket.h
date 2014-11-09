@@ -48,6 +48,7 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
 #include <fcntl.h>
 #include <unistd.h>
 #include <iostream>
