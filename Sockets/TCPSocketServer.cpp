@@ -38,6 +38,18 @@ TCPSocketServer& TCPSocketServer::operator=(const TCPSocketServer& copy_tcpsocke
     return *this;
 }
 
+TCPSocketClient* TCPSocketServer::nextPendingConnection(void) const
+{
+    TCPSocketClient* new_tcpclient = new TCPSocketClient(INVALID_SOCKET);
+    
+    if (!this->accept(*new_tcpclient))
+        throw SocketException("Could not accept new client", SOCKET_ERRNO);
+    
+    new_tcpclient->_connected = true;
+    
+    return new_tcpclient;
+}
+
 int TCPSocketServer::maxPendingConnections(void) const
 {
     return this->_maxPendingConnections;
@@ -67,4 +79,13 @@ bool TCPSocketServer::listen(const int backlog) const
         return false;
     
     return ::listen(this->_sock, backlog) != SOCKET_ERROR;
+}
+
+bool TCPSocketServer::accept(TCPSocketClient& new_client) const
+{
+    socklen_t addr_length = (socklen_t) sizeof new_client._addr;
+    
+    new_client._sock = ::accept(this->_sock, (SOCKADDR*)&new_client._addr, &addr_length);
+    
+    return new_client.isValid();
 }

@@ -18,10 +18,11 @@ class TCPSocketServer : public SocketServer
 {
     public:
     
-        explicit TCPSocketServer(int port,
-                                 int max_pending_connections = DEFAULT_MAX_CON);
+        explicit TCPSocketServer(int port, int max_pending_connections = DEFAULT_MAX_CON);
         explicit TCPSocketServer(const TCPSocketServer& copy_tcpsocketserver);
         TCPSocketServer& operator=(const TCPSocketServer& copy_tcpsocketserver);
+    
+        TCPSocketClient* nextPendingConnection(void) const;
     
         int maxPendingConnections(void) const;
         bool setMaxPendingConnections(int max_pending_connections);
@@ -31,7 +32,7 @@ class TCPSocketServer : public SocketServer
     protected:
     
         bool listen(const int backlog) const;
-        bool accept(TCPSocketClient& new_client);
+        bool accept(TCPSocketClient& new_client) const;
     
         int _maxPendingConnections;
 };
