@@ -56,6 +56,26 @@ bool TCPSocketClient::connectToHostname(const std::string& hostname, const int p
     return true;
 }
 
+ssize_t TCPSocketClient::send(const std::string& message) const
+{
+    return this->send(message.c_str(), message.size(), 0);
+}
+
+ssize_t TCPSocketClient::recv(std::string& message) const
+{
+    message = "";
+    
+    char buf[MAX_RECV + 1];
+    memset(buf, 0, MAX_RECV + 1);
+    
+    ssize_t status = this->recv(buf, MAX_RECV, 0);
+    
+    if (status > 0)
+        message = buf;
+    
+    return status;
+}
+
 TCPSocketClient::~TCPSocketClient(void)
 {
     
@@ -71,6 +91,7 @@ bool TCPSocketClient::gethostbyname(const std::string& hostname)
 {
     struct hostent* hostinfo = NULL;
     
+    // WARNING : gethostbyname is obsolete
     hostinfo = ::gethostbyname(hostname.c_str());
     if (hostinfo == NULL)
         return false;
@@ -98,4 +119,20 @@ bool TCPSocketClient::connect(const int port, const std::string& host)
     
     return ::connect(this->_sock, (SOCKADDR*)&this->_addr, sizeof(SOCKADDR))
             != SOCKET_ERROR;
+}
+
+ssize_t TCPSocketClient::send(const void* buffer, size_t length, int flags) const
+{
+    ssize_t ret = ::send(this->_sock, buffer, length, flags);
+    if (ret == SOCKET_ERROR)
+        throw SocketException("Error sending data", SOCKET_ERRNO);
+    return ret;
+}
+
+ssize_t TCPSocketClient::recv(void* buffer, size_t length, int flags) const
+{
+    ssize_t ret = ::recv(this->_sock, buffer, length, flags);
+    if (ret == SOCKET_ERROR)
+        throw SocketException("Error receiving data", SOCKET_ERRNO);
+    return ret;
 }

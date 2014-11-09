@@ -11,6 +11,8 @@
 
 #include "Socket.h"
 
+#define MAX_RECV 500
+
 class TCPSocketClient : public Socket
 {
     friend class TCPSocketServer;
@@ -24,6 +26,9 @@ class TCPSocketClient : public Socket
         bool connectToHost(const std::string& ip, const int port);
         bool connectToHostname(const std::string& hostname, const int port);
     
+        ssize_t send(const std::string& message) const;
+        ssize_t recv(std::string& message) const;
+    
         virtual ~TCPSocketClient(void);
     
     protected:
@@ -32,6 +37,9 @@ class TCPSocketClient : public Socket
     
         bool gethostbyname(const std::string& hostname);
         bool connect(const int port, const std::string& host = "");
+    
+        ssize_t send(const void *buffer, size_t length, int flags) const;
+        ssize_t recv(void *buffer, size_t length, int flags) const;
     
         bool _connected;
 };
