@@ -12,8 +12,6 @@ TCPSocketServer::TCPSocketServer(int port, int max_pending_connections)
     : SocketServer(socket_type::TCP, port),
      _maxPendingConnections(max_pending_connections)
 {
-    std::cout << "TCPSocketServer constructor" << std::endl;
-    
     // Listen
     this->setMaxPendingConnections(max_pending_connections);
 }
@@ -22,13 +20,11 @@ TCPSocketServer::TCPSocketServer(const TCPSocketServer& copy_tcpsocketserver)
     : SocketServer(copy_tcpsocketserver),
       _maxPendingConnections(copy_tcpsocketserver._maxPendingConnections)
 {
-    std::cout << "TCPSocketServer copy constructor" << std::endl;
+
 }
 
 TCPSocketServer& TCPSocketServer::operator=(const TCPSocketServer& copy_tcpsocketserver)
 {
-    std::cout << "TCPSocketServer operator =" << std::endl;
-    
     if (this != &copy_tcpsocketserver)
     {
         SocketServer::operator=(copy_tcpsocketserver);
@@ -70,7 +66,7 @@ bool TCPSocketServer::setMaxPendingConnections(int max_pending_connections)
 
 TCPSocketServer::~TCPSocketServer(void)
 {
-    std::cout << "TCPSocketServer destructor" << std::endl;
+
 }
 
 bool TCPSocketServer::listen(const int backlog) const

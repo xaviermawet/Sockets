@@ -26,22 +26,16 @@ Socket::Socket(socket_type sock_type)
     
     // Initialize struct SOCKADDR_IN
     memset(&this->_addr, 0, sizeof(this->_addr));
-    
-    std::cout << "Socket constructor : " << this->_sock << std::endl;
 }
 
 Socket::Socket(const Socket& copy_socket)
     : _sock(copy_socket._sock)
 {
     memcpy((void*)&this->_addr, (void*)&copy_socket._addr, sizeof(SOCKADDR_IN));
-    
-    std::cout << "Socket copy constructor" << std::endl;
 }
 
 Socket& Socket::operator=(const Socket& copy_socket)
 {
-    std::cout << "Socket operator =" << std::endl;
-    
     if (this != &copy_socket)
     {
         // Close current connection if needed
@@ -111,8 +105,6 @@ bool Socket::close(void)
     if (closesocket(this->_sock) == SOCKET_ERROR)
         return false;
     
-    std::cout << "Close socket : " << this->_sock << std::endl;
-    
     this->_sock = INVALID_SOCKET;
     return true;
 }
@@ -124,8 +116,6 @@ Socket::~Socket(void)
         this->shutdown(SHUT_RDWR);
         this->close();
     }
-    
-    std::cout << "Socket destructor" << std::endl;
 }
 
 Socket::Socket(SOCKET sock)
@@ -133,6 +123,4 @@ Socket::Socket(SOCKET sock)
 {
     // Initialize struct SOCKADDR_IN
     memset(&this->_addr, 0, sizeof(this->_addr));
-    
-    std::cout << "Socket private constructor" << std::endl;
 }

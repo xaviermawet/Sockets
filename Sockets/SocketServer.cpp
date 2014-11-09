@@ -13,20 +13,16 @@ SocketServer::SocketServer(socket_type sock_type, int port)
 {
     if (!this->bind(port))
         throw SocketException("Could not bind to port", SOCKET_ERRNO);
-    
-    std::cout << "SocketServer constructor" << std::endl;
 }
 
 SocketServer::SocketServer(const SocketServer& copy_socketserver)
     : Socket(copy_socketserver)
 {
-    std::cout << "SocketServer copy constructor" << std::endl;
+    
 }
 
 SocketServer& SocketServer::operator=(const SocketServer &copy_socketserver)
 {
-    std::cout << "SocketServer operator =" << std::endl;
-    
     if (this != &copy_socketserver)
     {
         Socket::operator=(copy_socketserver);
@@ -37,7 +33,7 @@ SocketServer& SocketServer::operator=(const SocketServer &copy_socketserver)
 
 SocketServer::~SocketServer(void)
 {
-    std::cout << "SocketServer destructor" << std::endl;
+    
 }
 
 bool SocketServer::bind(const int port)

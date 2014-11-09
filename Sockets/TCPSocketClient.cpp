@@ -71,7 +71,10 @@ ssize_t TCPSocketClient::recv(std::string& message) const
     ssize_t status = this->recv(buf, MAX_RECV, 0);
     
     if (status > 0)
+    {
+        buf[status] = '\0';
         message = buf;
+    }
     
     return status;
 }
