@@ -26,3 +26,8 @@ TCPSocket& TCPSocket::operator=(const TCPSocket &copy_tcpsocket)
     
     return *this;
 }
+
+TCPSocket::~TCPSocket(void)
+{
+    
+}

@@ -9,9 +9,14 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "TCPSocket.h"
+
 int main(int argc, const char * argv[])
 {
-    std::cout << "Hello, World!\n";
+    TCPSocket* tcpsock = new TCPSocket();
+    std::cout << "TCP socket créée !\n";
+    
+    delete tcpsock;
     
     return EXIT_SUCCESS;
 }

@@ -19,6 +19,8 @@ class TCPSocket : public Socket
         explicit TCPSocket(const TCPSocket& copy_tcpsocket);
         TCPSocket& operator=(const TCPSocket& copy_tcpsocket);
     
+        virtual ~TCPSocket(void);
+    
     protected:
 };
 
