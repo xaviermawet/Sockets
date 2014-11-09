@@ -29,6 +29,58 @@ class TCPSocketClient : public Socket
         ssize_t send(const std::string& message) const;
         ssize_t recv(std::string& message) const;
     
+        // Send unique data
+        template <class T>
+        ssize_t send(const T *data) const
+        {
+            return this->send<T>(data, 1);
+        }
+    
+        // send data vector
+        template <class T>
+        ssize_t send(const void* data, size_t length) const
+        {
+            ssize_t total = 0;
+            while (total < (ssize_t) (sizeof (T) * length))
+            {
+                ssize_t ret = this->send((const char*) data + total,
+                                         length * sizeof(T) - total, 0);
+            
+                if (ret == -1)
+                    throw SocketException("Incomplete data stream sent", SOCKET_ERRNO);
+            
+                total += ret;
+            }
+        
+            return total;
+        }
+    
+        // Reçoit une donnée
+        template <class T>
+        ssize_t recv(T *data) const
+        {
+            return this->recv<T>(data, 1);
+        }
+    
+        // Reçoit un vecteur de données
+        template <class T>
+        ssize_t recv(void *data, size_t length) const
+        {
+            ssize_t total = 0;
+            while (total < (ssize_t) (sizeof (T) * length))
+            {
+                ssize_t ret = this->recv((char *) data + total,
+                                        sizeof (T) * length - total, 0);
+            
+                if (ret == -1)
+                    throw SocketException("Incomplete data stream received", SOCKET_ERRNO);
+            
+                total += ret;
+            }
+        
+            return total;
+        }
+    
         virtual ~TCPSocketClient(void);
     
     protected:
