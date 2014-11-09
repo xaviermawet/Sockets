@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1341CE51A0FA2740081C5C3 /* TCPSocketClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1341CE31A0FA2740081C5C3 /* TCPSocketClient.cpp */; };
 		E1F5C68C1A0E8182009704DA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5C68B1A0E8182009704DA /* main.cpp */; };
 		E1F5C6941A0E81F3009704DA /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5C6921A0E81F3009704DA /* Socket.cpp */; };
 		E1F5C6971A0EB1ED009704DA /* SocketException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1F5C6951A0EB1ED009704DA /* SocketException.cpp */; };
@@ -29,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E1341CE31A0FA2740081C5C3 /* TCPSocketClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPSocketClient.cpp; sourceTree = "<group>"; };
+		E1341CE41A0FA2740081C5C3 /* TCPSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketClient.h; sourceTree = "<group>"; };
 		E1F5C6881A0E8182009704DA /* Sockets */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sockets; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F5C68B1A0E8182009704DA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1F5C6921A0E81F3009704DA /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 				E1F5C69F1A0F5BB7009704DA /* TCPSocketServer.h */,
 				E1F5C6A11A0F6C92009704DA /* SocketServer.cpp */,
 				E1F5C6A21A0F6C92009704DA /* SocketServer.h */,
+				E1341CE31A0FA2740081C5C3 /* TCPSocketClient.cpp */,
+				E1341CE41A0FA2740081C5C3 /* TCPSocketClient.h */,
 			);
 			path = Sockets;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 				E1F5C69D1A0F57D9009704DA /* UDPSocket.cpp in Sources */,
 				E1F5C6941A0E81F3009704DA /* Socket.cpp in Sources */,
 				E1F5C6971A0EB1ED009704DA /* SocketException.cpp in Sources */,
+				E1341CE51A0FA2740081C5C3 /* TCPSocketClient.cpp in Sources */,
 				E1F5C69A1A0ED4E1009704DA /* TCPSocket.cpp in Sources */,
 				E1F5C68C1A0E8182009704DA /* main.cpp in Sources */,
 				E1F5C6A01A0F5BB7009704DA /* TCPSocketServer.cpp in Sources */,
