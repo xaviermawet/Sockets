@@ -27,7 +27,10 @@ SocketServer& SocketServer::operator=(const SocketServer &copy_socketserver)
 {
     std::cout << "SocketServer operator =" << std::endl;
     
-    Socket::operator=(copy_socketserver);
+    if (this != &copy_socketserver)
+    {
+        Socket::operator=(copy_socketserver);
+    }
     
     return *this;
 }

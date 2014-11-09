@@ -9,8 +9,8 @@
 #ifndef __Sockets__TCPSocketServer__
 #define __Sockets__TCPSocketServer__
 
-#include "TCPSocket.h"
 #include "SocketServer.h"
+#include "TCPSocketClient.h"
 
 #define DEFAULT_MAX_CON  5
 
@@ -31,6 +31,7 @@ class TCPSocketServer : public SocketServer
     protected:
     
         bool listen(const int backlog) const;
+        bool accept(TCPSocketClient& new_client);
     
         int _maxPendingConnections;
 };

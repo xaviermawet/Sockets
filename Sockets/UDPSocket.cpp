@@ -22,7 +22,10 @@ UDPSocket::UDPSocket(const UDPSocket& copy_udpsocket)
 
 UDPSocket& UDPSocket::operator=(const UDPSocket& copy_udpsocket)
 {
-    Socket::operator=(copy_udpsocket);
+    if (this != &copy_udpsocket)
+    {
+        Socket::operator=(copy_udpsocket);
+    }
     
     return *this;
 }

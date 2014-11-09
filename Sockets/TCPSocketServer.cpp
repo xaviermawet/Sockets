@@ -29,9 +29,11 @@ TCPSocketServer& TCPSocketServer::operator=(const TCPSocketServer& copy_tcpsocke
 {
     std::cout << "TCPSocketServer operator =" << std::endl;
     
-    SocketServer::operator=(copy_tcpsocketserver);
-
-    this->_maxPendingConnections = copy_tcpsocketserver._maxPendingConnections;
+    if (this != &copy_tcpsocketserver)
+    {
+        SocketServer::operator=(copy_tcpsocketserver);
+        this->_maxPendingConnections = copy_tcpsocketserver._maxPendingConnections;
+    }
     
     return *this;
 }
