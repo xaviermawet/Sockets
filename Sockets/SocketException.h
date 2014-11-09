@@ -10,6 +10,7 @@
 #define __Sockets__SocketException__
 
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 class SocketException : public std::runtime_error
